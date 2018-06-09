@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Twitter</title>
+    <title>Usuario</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -9,15 +9,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class=navbar-brand"><img
                     src="http://icons.iconarchive.com/icons/lboi/tweetscotty/64/alien-bird-icon.png"></a>
         </div>
-
-        <a href="/" style="margin-left: 2px;color: cyan;font-size: x-large">Twitter</a>
+        <a href="../" style="margin-left: 2px;color: cyan;font-size: x-large">Twitter</a>
         {% if user.is_authenticated %}
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="user/"><span class="glyphicon glyphicon-user"></span>{{ user|upper }}</a></li>
@@ -32,54 +30,56 @@
     </div>
 </nav>
 
-
 <div class="container">
+    <div class='row'>
 
-    <table class="table table-dark">
-        <thead>
-        <tr>
-            <th scope="col">User</th>
+        <div class='col-sm-3 col-xs-12'>
+            <h1>{{ user }} </h1>
+            <hr/>
+            <p>Followers: </p>
+            <p>
+                <a class='btn btn-link'>
+                    Unfollow
+                </a>
+            </p>
+            <hr/>
+            <h1>Following</h1>
 
-            <th scope="col">Tweet</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Retweets</th>
-            <th scope="col">Likes</th>
+            <h1>Followed By</h1>
+            <br/>
 
-        </tr>
-        </thead>
-        <tbody>
+            <h4>Not followed by any users</h4>
+
+
+            <hr/>
+
+        </div>
+        <div class='col-sm-9 col-xs-12' style="text-align: center">
+            <h1>Tweets</h1>
+        </div>
+    
         {% for tw in tuits %}
 
-            <tr>
-                <td>{{ tw.user }}</td>
 
-                <td>{{ tw.message }}</td>
-                <td>{{ tw.datetime }}</td>
-                <td>{{ tw.my_retuits.count }}
-                    {% if user.is_authenticated %}
+            <div style="margin-left: 40%;margin-top: 10%;background-color: cyan">
+                <div style="margin-left: 5%">
+                    <h2>{{ tw.message }}</h2>
+                    <h4 style="margin-left: 70%">{{ tw.datetime }}</h4>
 
-                        <a href="{% url 'retuit' tw.id %}">
-                            <span class="glyphicon glyphicon-refresh"></span>
-                        </a>
-                    {% endif %}
-                </td>
-                <td>{{ tw.my_likes.count }}
-                    {% if user.is_authenticated %}
+                    <td>{{ tw.my_retuits.count }}
+                        <span class="glyphicon glyphicon-refresh"></span>
+                    <td>{{ tw.my_likes.count }}
+                        <sapn class="glyphicon glyphicon-heart"></sapn>
 
-                        <a href="{% url 'liked' tw.id %}">
-                            <sapn class="glyphicon glyphicon-heart"></sapn>
-                        </a>
-                    {% endif %}
-                </td>
-            </tr>
+                </div>
+            </div>
+
 
         {% endfor %}
-        </tbody>
-    </table>
-    {% if user.is_authenticated %}
-        <a class="btn btn-primary" href="twitear/">Twitear</a>
-    {% endif %}
-
+        <div style="margin-left: 40%;margin-top: 3%">
+            <a class="btn btn-primary" href="../twitear/">Twitear</a>
+        </div>
+    </div>
 </div>
 
 </body>

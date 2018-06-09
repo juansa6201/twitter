@@ -30,6 +30,17 @@ def dame_tuits(request):
 
     return render(request, 'tweets.html', context)
 
+def user(request):
+    context = {
+        'tuits': Tweet.objects.filter(user=request.user),
+        'retuits': ReTweet.objects.all(),
+        'likes': Likes.objects.all()
+    }
+
+    return render(request, 'user.html', context)
+
+
+
 def post_tweet(request):
     if request.method == "POST":
         form = FormTweet(request.POST)

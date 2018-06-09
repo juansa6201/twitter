@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from twitter import views as core_views
-from twitter.views import (dame_tuits,post_tweet)
+from twitter.views import (dame_tuits,post_tweet,user )
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,5 +28,7 @@ urlpatterns = [
     url(r'^signup/', core_views.signup, name='signup'),
     url(r'^retuit/(?P<tweet_id>[0-9]+)/$', core_views.retuit, name='retuit'),
     url(r'^liked/(?P<tweet_id>[0-9]+)/$', core_views.liked, name='liked'),
+    url(r'^user/', user, name='login'),
+
 
 ]
