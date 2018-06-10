@@ -1,0 +1,6 @@
+{% autoescape off %}
+    Bienvenido a Twitter {{ user.username }},
+    Por favor has click en este link para confirmar tu cuenta,
+
+    http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}

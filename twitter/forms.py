@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
 from django import forms
-from django.http import request
-from django.contrib.auth.models import User
-from models import *
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+from models import *
+
 
 class FormTweet(forms.ModelForm):
     class Meta:
@@ -15,11 +17,14 @@ class FormTweet(forms.ModelForm):
             })
         }
 
+
 class SignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+    username = forms.CharField(label='Nombre de usuario', max_length=30, required=False, help_text='Obligatorio. Solo puede estar formado por letras, números y los caracteres @/./+/-/_..')
+    first_name = forms.CharField(label='Nombre', max_length=30, required=False, help_text='Opcional.')
+    last_name = forms.CharField(label='Apellido', max_length=30, required=False, help_text='Opcional.')
+    email = forms.EmailField(max_length=254, help_text='Obligatorio.')
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput(), help_text='Introduce una contraseña')
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2',)

@@ -13,11 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from twitter import views as core_views
-from twitter.views import (dame_tuits,post_tweet,user )
+from twitter.views import (dame_tuits, post_tweet, user, activate)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^retuit/(?P<tweet_id>[0-9]+)/$', core_views.retuit, name='retuit'),
     url(r'^liked/(?P<tweet_id>[0-9]+)/$', core_views.liked, name='liked'),
     url(r'^user/', user, name='login'),
-
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        activate, name='activate'),
 
 ]
