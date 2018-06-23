@@ -16,19 +16,22 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+
 from twitter import views as core_views
 from twitter.views import (dame_tuits, post_tweet, user, activate)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', dame_tuits),
-    url(r'^twitear/', post_tweet),
+    url(r'^$', dame_tuits,name='$'),
+    url(r'^twitear/', post_tweet, name='twitear'),
     url(r'^login/', auth_views.login, name='login'),
     url(r'^logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
     url(r'^signup/', core_views.signup, name='signup'),
     url(r'^retuit/(?P<tweet_id>[0-9]+)/$', core_views.retuit, name='retuit'),
+    url(r'^retuit_user/(?P<tweet_id>[0-9]+)/$', core_views.retuit_user, name='retuit_user'),
     url(r'^liked/(?P<tweet_id>[0-9]+)/$', core_views.liked, name='liked'),
-    url(r'^user/', user, name='login'),
+    url(r'^liked_user/(?P<tweet_id>[0-9]+)/$', core_views.liked_user, name='liked_user'),
+    url(r'^user/', user, name='user'),
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         activate, name='activate'),
 

@@ -14,19 +14,19 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class=navbar-brand"><img
-                    src="http://icons.iconarchive.com/icons/lboi/tweetscotty/64/alien-bird-icon.png"></a>
+                    src="http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c53e.png" width="80" height="80"></a>
         </div>
 
-        <a href="/" style="margin-left: 2px;color: cyan;font-size: x-large">Twitter</a>
+        <a style="margin-left: 2px;color: cyan;font-size: x-large">Twitter</a>
         {% if user.is_authenticated %}
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="user/"><span class="glyphicon glyphicon-user"></span>{{ user|upper }}</a></li>
-                <li><a href="logout/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <li><a href={% url 'user' %}><span class="glyphicon glyphicon-user"></span>{{ user|upper }}</a></li>
+                <li><a href={% url 'logout' %}><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
         {% else %}
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="signup/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href={% url 'signup' %}><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href={% url 'login' %}><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         {% endif %}
     </div>
@@ -77,7 +77,7 @@
         </tbody>
     </table>
     {% if user.is_authenticated %}
-        <a class="btn btn-primary" href="twitear/">Twitear</a>
+        <a class="btn btn-primary" href="{% url 'twitear' %}">Twitear</a>
     {% endif %}
 
 </div>

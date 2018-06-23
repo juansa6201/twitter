@@ -15,16 +15,16 @@
             <a class=navbar-brand"><img
                     src="http://icons.iconarchive.com/icons/lboi/tweetscotty/64/alien-bird-icon.png"></a>
         </div>
-        <a href="../" style="margin-left: 2px;color: cyan;font-size: x-large">Twitter</a>
+        <a href="{% url '$' %}" style="margin-left: 2px;color: cyan;font-size: x-large">Twitter</a>
         {% if user.is_authenticated %}
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="user/"><span class="glyphicon glyphicon-user"></span>{{ user|upper }}</a></li>
-                <li><a href="../logout/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <li><a href={% url 'user' %}><span class="glyphicon glyphicon-user"></span>{{ user|upper }}</a></li>
+                <li><a href={% url 'logout' %}><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
         {% else %}
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="signup/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href={% url 'signup' %}><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href={% url 'login' %}><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         {% endif %}
     </div>
@@ -57,27 +57,68 @@
         <div class='col-sm-9 col-xs-12' style="text-align: center">
             <h1>Tweets</h1>
         </div>
-    
+
         {% for tw in tuits %}
 
 
             <div style="margin-left: 40%;margin-top: 10%;background-color: cyan">
                 <div style="margin-left: 5%">
                     <h2>{{ tw.message }}</h2>
+
                     <h4 style="margin-left: 70%">{{ tw.datetime }}</h4>
 
                     <td>{{ tw.my_retuits.count }}
-                        <span class="glyphicon glyphicon-refresh"></span>
+                        <a href="{% url 'retuit_user' tw.id %}">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                        </a>
                     <td>{{ tw.my_likes.count }}
-                        <sapn class="glyphicon glyphicon-heart"></sapn>
+
+
+                        <a href="{% url 'liked_user' tw.id %}">
+                            <sapn class="glyphicon glyphicon-heart"></sapn>
+                        </a>
+
+
+                </div>
+            </div>
+        {% endfor %}
+
+        {% for rt in retuits %}
+        {% for tw in tuits %}
+
+
+            <div style="margin-left: 40%; margin-top: 5%">
+
+                Retuit de {{ rt.tweet.user }}
+            </div>
+
+
+
+            <div style="margin-left: 40%;background-color: cyan">
+                <div style="margin-left: 5%">
+
+                    <h2 style="margin-top: 0.5%">{{ rt.tweet.message }}</h2>
+
+                    <h4 style="margin-left: 70%">{{ rt.tweet.datetime }}</h4>
+
+                    <td>{{ rt.tweet.my_retuits.count }}
+                        <a href="{% url 'retuit_user' rt.tweet.id %}">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                        </a>
+                    <td>{{ rt.tweet.my_likes.count }}
+                        <a href="{% url 'liked_user' rt.tweet.id %}">
+                            <sapn class="glyphicon glyphicon-heart"></sapn>
+                        </a>
 
                 </div>
             </div>
 
 
+
         {% endfor %}
+    {% endfor %}
         <div style="margin-left: 40%;margin-top: 3%">
-            <a class="btn btn-primary" href="../twitear/">Twitear</a>
+            <a class="btn btn-primary" href="{% url 'twitear' %}">Twitear</a>
         </div>
     </div>
 </div>

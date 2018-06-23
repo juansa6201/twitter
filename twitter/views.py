@@ -31,7 +31,7 @@ def dame_tuits(request):
 def user(request):
     context = {
         'tuits': Tweet.objects.filter(user=request.user),
-        'retuits': ReTweet.objects.all(),
+        'retuits': ReTweet.objects.filter(user=request.user),
         'likes': Likes.objects.all()
     }
 
@@ -111,6 +111,16 @@ def retuit(request, tweet_id):
 
     return HttpResponseRedirect("/")
 
+def retuit_user(request, tweet_id):
+    tuit = Tweet.objects.get(id=tweet_id)
+    try:
+        retweet = ReTweet.objects.get(user=request.user, tweet=tuit)
+        retweet.delete()
+    except ObjectDoesNotExist:
+        retweet = ReTweet(user=request.user, tweet=tuit)
+        retweet.save()
+
+    return HttpResponseRedirect("../../user/")
 
 def liked(request, tweet_id):
     tuit = Tweet.objects.get(id=tweet_id)
@@ -122,3 +132,14 @@ def liked(request, tweet_id):
         like.save()
 
     return HttpResponseRedirect("/")
+
+def liked_user(request, tweet_id):
+    tuit = Tweet.objects.get(id=tweet_id)
+    try:
+        like = Likes.objects.get(user=request.user, tweet=tuit)
+        like.delete()
+    except ObjectDoesNotExist:
+        like = Likes(user=request.user, tweet=tuit)
+        like.save()
+
+    return HttpResponseRedirect("../../user/")
