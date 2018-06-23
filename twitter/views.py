@@ -143,3 +143,8 @@ def liked_user(request, tweet_id):
         like.save()
 
     return HttpResponseRedirect("../../user/")
+
+def eliminar_tweet(request):
+    tuit=Tweet.objects.filter(user=request.user)
+    tuit.delete()
+    return HttpResponseRedirect("/")

@@ -1,34 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Usuario</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class=navbar-brand"><img
-                    src="http://icons.iconarchive.com/icons/lboi/tweetscotty/64/alien-bird-icon.png"></a>
-        </div>
-        <a href="{% url '$' %}" style="margin-left: 2px;color: cyan;font-size: x-large">Twitter</a>
-        {% if user.is_authenticated %}
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href={% url 'user' %}><span class="glyphicon glyphicon-user"></span>{{ user|upper }}</a></li>
-                <li><a href={% url 'logout' %}><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-            </ul>
-        {% else %}
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href={% url 'signup' %}><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href={% url 'login' %}><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
-        {% endif %}
-    </div>
-</nav>
+    {% extends 'base.html' %}
+
+                {% block content %}
 
 <div class="container">
     <div class='row'>
@@ -63,6 +35,7 @@
 
             <div style="margin-left: 40%;margin-top: 10%;background-color: cyan">
                 <div style="margin-left: 5%">
+                    <h4>{{ tw.user }}</h4>
                     <h2>{{ tw.message }}</h2>
 
                     <h4 style="margin-left: 70%">{{ tw.datetime }}</h4>
@@ -89,15 +62,15 @@
 
             <div style="margin-left: 40%; margin-top: 5%">
 
-                Retuit de {{ rt.tweet.user }}
+                Has retwitteado
             </div>
 
 
 
             <div style="margin-left: 40%;background-color: cyan">
                 <div style="margin-left: 5%">
-
-                    <h2 style="margin-top: 0.5%">{{ rt.tweet.message }}</h2>
+                    <h4 style="margin-top: 0.5%">{{ rt.tweet.user }}</h4>
+                    <h2 >{{ rt.tweet.message }}</h2>
 
                     <h4 style="margin-left: 70%">{{ rt.tweet.datetime }}</h4>
 
@@ -122,6 +95,5 @@
         </div>
     </div>
 </div>
+{% endblock %}
 
-</body>
-</html>
