@@ -19,7 +19,7 @@
         <a href="{% url '$' %}" style="margin-left: 2px;color: cyan;font-size: x-large">Twitter</a>
         {% if user.is_authenticated %}
             <ul class="nav navbar-nav navbar-right">
-                <li><a href={% url 'user' %} ><span class="glyphicon glyphicon-user"></span>{{ user|upper }}</a></li>
+                <li><a href={% url 'user' %} ><span class="glyphicon glyphicon-user"></span>@{{ user|upper }}</a></li>
                 <li><a href={% url 'logout' %}><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
         {% else %}

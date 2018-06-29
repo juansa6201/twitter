@@ -1,99 +1,100 @@
-    {% extends 'base.html' %}
+{% extends 'base.html' %}
 
-                {% block content %}
+{% block content %}
 
-<div class="container">
-    <div class='row'>
+    <div class="container">
+        <div class='row'>
 
-        <div class='col-sm-3 col-xs-12'>
-            <h1>{{ user }} </h1>
-            <hr/>
-            <p>Followers: </p>
-            <p>
-                <a class='btn btn-link'>
-                    Unfollow
-                </a>
-            </p>
-            <hr/>
-            <h1>Following</h1>
+            <div class='col-sm-3 col-xs-12'>
+                <h1>{{ user }} </h1>
+                <hr/>
+                <p>Followers: </p>
+                <p>
+                    <a class='btn btn-link'>
+                        Unfollow
+                    </a>
+                </p>
+                <hr/>
+                <h1>Following</h1>
 
-            <h1>Followed By</h1>
-            <br/>
+                <h1>Followed By</h1>
+                <br/>
 
-            <h4>Not followed by any users</h4>
-
-
-            <hr/>
-
-        </div>
-        <div class='col-sm-9 col-xs-12' style="text-align: center">
-            <h1>Tweets</h1>
-        </div>
-
-        {% for tw in tuits %}
+                <h4>Not followed by any users</h4>
 
 
-            <div style="margin-left: 40%;margin-top: 10%;background-color: cyan">
-                <div style="margin-left: 5%">
-                    <h4>{{ tw.user }}</h4>
-                    <h2>{{ tw.message }}</h2>
+                <hr/>
 
-                    <h4 style="margin-left: 70%">{{ tw.datetime }}</h4>
+            </div>
+            <div class='col-sm-9 col-xs-12' style="text-align: center">
+                <h1>Tweets</h1>
+            </div>
 
-                    <td>{{ tw.my_retuits.count }}
-                        <a href="{% url 'retuit_user' tw.id %}">
-                            <span class="glyphicon glyphicon-refresh"></span>
-                        </a>
-                    <td>{{ tw.my_likes.count }}
+            {% for tw in tuits %}
 
 
-                        <a href="{% url 'liked_user' tw.id %}">
-                            <sapn class="glyphicon glyphicon-heart"></sapn>
-                        </a>
+                <div style="margin-left: 40%;margin-top: 10%;background-color: cyan">
+                    <div style="margin-left: 5%">
+                        <h4>@{{ tw.user }}</h4>
+                        <h2>{{ tw.message }}</h2>
+
+                        <h4 style="margin-left: 70%">{{ tw.datetime }}</h4>
+
+                        <td>{{ tw.my_retuits.count }}
+                            <a href="{% url 'retuit_user' tw.id %}">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                        <td>{{ tw.my_likes.count }}
 
 
+                            <a href="{% url 'liked_user' tw.id %}">
+                                <sapn class="glyphicon glyphicon-heart"></sapn>
+                            </a>
+
+
+                    </div>
                 </div>
+            {% endfor %}
+
+            {% for rt in retuits %}
+
+
+
+                    <div style="margin-left: 40%; margin-top: 5%">
+
+                        Has retwitteado
+                    </div>
+
+
+
+                    <div style="margin-left: 40%;background-color: cyan">
+                        <div style="margin-left: 5%">
+                            <h4 style="margin-top: 0.5%">@{{ rt.tweet.user }}</h4>
+                            <h2>{{ rt.tweet.message }}</h2>
+
+                            <h4 style="margin-left: 70%">{{ rt.tweet.datetime }}</h4>
+
+                            <td>{{ rt.tweet.my_retuits.count }}
+                                <a href="{% url 'retuit_user' rt.tweet.id %}">
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                </a>
+                            <td>{{ rt.tweet.my_likes.count }}
+                                <a href="{% url 'liked_user' rt.tweet.id %}">
+                                    <sapn class="glyphicon glyphicon-heart"></sapn>
+                                </a>
+
+                        </div>
+                    </div>
+
+
+
+                {% endfor %}
+
+
+            <div style="margin-left: 40%;margin-top: 3%">
+                <a class="btn btn-primary" href="{% url 'twitear' %}">Twitear</a>
             </div>
-        {% endfor %}
-
-        {% for rt in retuits %}
-        {% for tw in tuits %}
-
-
-            <div style="margin-left: 40%; margin-top: 5%">
-
-                Has retwitteado
-            </div>
-
-
-
-            <div style="margin-left: 40%;background-color: cyan">
-                <div style="margin-left: 5%">
-                    <h4 style="margin-top: 0.5%">{{ rt.tweet.user }}</h4>
-                    <h2 >{{ rt.tweet.message }}</h2>
-
-                    <h4 style="margin-left: 70%">{{ rt.tweet.datetime }}</h4>
-
-                    <td>{{ rt.tweet.my_retuits.count }}
-                        <a href="{% url 'retuit_user' rt.tweet.id %}">
-                            <span class="glyphicon glyphicon-refresh"></span>
-                        </a>
-                    <td>{{ rt.tweet.my_likes.count }}
-                        <a href="{% url 'liked_user' rt.tweet.id %}">
-                            <sapn class="glyphicon glyphicon-heart"></sapn>
-                        </a>
-
-                </div>
-            </div>
-
-
-
-        {% endfor %}
-    {% endfor %}
-        <div style="margin-left: 40%;margin-top: 3%">
-            <a class="btn btn-primary" href="{% url 'twitear' %}">Twitear</a>
         </div>
     </div>
-</div>
 {% endblock %}
 

@@ -4,20 +4,20 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render,redirect
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-
+from django.contrib.auth import get_user_model
 from twitter.models import Likes
 from twitter.models import ReTweet
 from twitter.models import Tweet
-
 from .forms import *
 from .tokens import account_activation_token
 
 
+User = get_user_model()
 def dame_tuits(request):
     context = {
         'tuits': Tweet.objects.all(),
@@ -145,6 +145,7 @@ def liked_user(request, tweet_id):
     return HttpResponseRedirect("../../user/")
 
 def eliminar_tweet(request):
-    tuit=Tweet.objects.filter(user=request.user)
+    tuit=Tweet.objects.get(user=request.user)
     tuit.delete()
     return HttpResponseRedirect("/")
+

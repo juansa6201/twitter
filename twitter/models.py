@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.conf import settings
 from django.db import models
-
+from django.urls import reverse_lazy
 # Create your models here.
 class Tweet(models.Model):
     message = models.CharField('Texto', max_length=142)
@@ -33,5 +33,3 @@ class Likes(models.Model):
     class Meta:
         verbose_name = 'Like'
         verbose_name_plural = 'Likes'
-
-
